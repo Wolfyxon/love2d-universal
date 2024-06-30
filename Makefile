@@ -117,6 +117,7 @@ ${BUILD_DIR}:
 #- Nintendo 3DS -#
 
 # Compile 3DSX
+# TODO: image to t3x conversion 
 ${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh
 	@echo "> Compiling 3DSX file"
 	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx --smdh=${BUILD_DIR}/${EXE_NAME}.smdh --romfs=${SOURCE_DIR}
