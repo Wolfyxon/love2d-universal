@@ -111,6 +111,15 @@ win64: ${LOVE_WIN64_SRC} ${LOVE_OUT}
 	@echo "> Embedding game into the executable"
 	cat ${LOVE_WIN64_IN} ${LOVE_OUT} > ${LOVE_WIN64_OUT}
 
+.PHONY: win32
+win32: ${LOVE_WIN32_SRC} ${LOVE_OUT}
+	@echo "> Copying love source into build"
+	cp -r ${LOVE_WIN32_SRC} ${LOVE_WIN32_BUILD}
+
+	@echo "> Embedding game into the executable"
+	cat ${LOVE_WIN32_IN} ${LOVE_OUT} > ${LOVE_WIN32_OUT}
+
+
 #- Nintendo 3DS -#
 
 # Compile 3DSX file
