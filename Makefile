@@ -169,7 +169,7 @@ ${LOVE_BINARIES}:
 
 # Fetch build URLs
 ${LOVE2D_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
-	@if [ ! -f ${LOVE_WIN64_ZIP} ]; then \
+	@if [ ! -f ${LOVE2D_LATEST_RELEASE_OUTPUT} ]; then \
 		echo "> Fetching love2d builds"; \
 		curl -s ${LOVE2D_LATEST_RELEASE} | grep browser_download_url | sed -n 's/.*"browser_download_url": "\(.*\)"/\1/p' > ${LOVE2D_LATEST_RELEASE_OUTPUT}; \
 		cat ${LOVE2D_LATEST_RELEASE_OUTPUT}; \
