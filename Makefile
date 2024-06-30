@@ -49,6 +49,7 @@ APPIMAGETOOL  := appimagetool
 DKP_TOOLS     := /opt/devkitpro/tools/bin
 SMDHTOOL      := ${DKP_TOOLS}/smdhtool
 3DSXTOOL      := ${DKP_TOOLS}/3dsxtool
+3DSLINK       := ${DKP_TOOLS}/3dslink
 
 ##- Dependency links and output files -##
 LOVE2D_LATEST_RELEASE        := https://api.github.com/repos/love2d/love/releases/latest
@@ -138,6 +139,11 @@ win32: ${LOVE_WIN32_SRC} ${LOVE_OUT}
 	@echo "  Consider using real hardware or using the old ELF file, although many features might break"
 	@echo "> Running the 3DSX file with an emulator"
 	${3DS_EMULATOR} ${BUILD_DIR}/${EXE_NAME}.3dsx
+
+# Remotely run 3DSX on a 3DS
+.PHONY: 3dslink
+3dslink: ${BUILD_DIR}/${EXE_NAME}.3dsx
+	${3DSLINK} "${BUILD_DIR}/${EXE_NAME}.3dsx"
 
 ${BUILD_DIR}:
 	@echo "> Creating build directory"
