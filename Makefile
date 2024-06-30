@@ -93,9 +93,6 @@ linux: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_OUT}
 	@echo "> Packaging AppImage"
 	${APPIMAGETOOL} ${LOVE_LINUX_FS} "${BUILD_DIR}/${EXE_NAME}.AppImage" 
 
-	@echo "> Cleaning up"
-	rm -rf ${LOVE_LINUX_FS}
-
 	@echo "> Portable Linux AppImage available at ${LOVE_LINUX_APPIMAGE_OUT}"
 
 #- Windows -#
