@@ -54,8 +54,6 @@ LOVE2D_LATEST_RELEASE_OUTPUT := /tmp/love2d_latest_release
 
 ###==-- Targets --==###
 
-.PHONY: love run linux win64 3dsx 3ds_emu
-
 ##-- Build & testing targets --##
 
 #- Universal PC -#
@@ -67,14 +65,17 @@ ${LOVE_OUT}: ${BUILD_DIR}
 	@echo "> Creating .love file"
 	cd ${SOURCE_DIR} && zip -9 -r ../${LOVE_OUT} *
 
+.PHONY: love
 love: ${LOVE_OUT}
 
+.PHONY: run
 run:
 	@echo "> Running the source directory with LOVE"
 	${LOVE} ${SOURCE_DIR}
 
 #- Linux -#
 
+.PHONY: linux
 linux: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_OUT}
 	@echo "> Creating directory"
 	mkdir -p ${LOVE_LINUX_BUILD}
@@ -97,6 +98,7 @@ linux: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_OUT}
 
 #- Windows -#
 
+.PHONY: win64
 win64: ${LOVE_WIN64_SRC} ${LOVE_OUT}
 	@echo "> Copying love source into build"
 	cp -r ${LOVE_WIN64_SRC} ${LOVE_WIN64_BUILD}
@@ -107,9 +109,11 @@ win64: ${LOVE_WIN64_SRC} ${LOVE_OUT}
 #- Nintendo 3DS -#
 
 # Compile 3DSX file
+.PHONY: 3dsx
 3dsx: ${BUILD_DIR}/${EXE_NAME}.3dsx
 
 # Run 3DSX with an emulator
+.PHONY: 3ds_emu
 3ds_emu: 3dsx
 	@echo "> NOTE: LOVEPotion currently does not work on emulators, you most likely will encounter a black screen."
 	@echo "  Consider using real hardware or using the old ELF file, although many features might break"
@@ -186,6 +190,7 @@ ${LOVE_WIN64_SRC}: ${LOVE_WIN64_ZIP}
 		echo "> win64 source already exists"; \
 	fi
 
+.PHONY: win64_dep
 win64_dep: ${LOVE_WIN64_SRC}
 
 #-- Win32 --#
@@ -211,11 +216,13 @@ ${LOVE_WIN32_SRC}: ${LOVE_WIN32_ZIP}
 		echo "> win32 source already exists"; \
 	fi
 
+.PHONY: win32_dep
 win32_dep: ${LOVE_WIN32_SRC}
 
 ##-- Utility targets --##
 
 # Remove build files
+.PHONY: clean
 clean:
 	@echo "> Removing build files"
 	rm -rf ${BUILD_DIR}
