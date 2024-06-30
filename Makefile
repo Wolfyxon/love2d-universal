@@ -31,6 +31,12 @@ LOVE_WIN64_ZIP      := ${LOVE_BINARIES}/win64.zip
 LOVE_WIN64_BUILD    := ${BUILD_DIR}/win64
 LOVE_WIN64_OUT      := ${LOVE_WIN64_BUILD}/love.exe
 
+LOVE_WIN32_SRC      := ${LOVE_BINARIES}/win32
+LOVE_WIN32_IN       := ${LOVE_WIN32_SRC}/love.exe
+LOVE_WIN32_ZIP      := ${LOVE_BINARIES}/win32.zip
+LOVE_WIN32_BUILD    := ${BUILD_DIR}/win32
+LOVE_WIN32_OUT      := ${LOVE_WIN32_BUILD}/love.exe
+
 LOVE_3DS            := ${LOVE_BINARIES}/lovepotion.elf
 
 ##-- Software --##
@@ -182,6 +188,30 @@ ${LOVE_WIN64_SRC}: ${LOVE_WIN64_ZIP}
 	else \
 		echo "> win64 source already exists"; \
 	fi
+
+#-- Win32 --#
+
+# Download win32 archive
+${LOVE_WIN32_ZIP}: ${LOVE2D_LATEST_RELEASE_OUTPUT}
+	@if [ ! -f ${LOVE_WIN32_ZIP} ]; then \
+		echo "> Downloading win32 archive"; \
+		curl -L ${shell cat ${LOVE2D_LATEST_RELEASE_OUTPUT} | grep win32 } > ${LOVE_WIN32_ZIP}; \
+	else \
+		echo "> win32 archive already exists"; \
+	fi
+
+# Extract win32 archive
+${LOVE_WIN32_SRC}: ${LOVE_WIN32_ZIP}
+	@if [ ! -d ${LOVE_WIN32_SRC} ]; then \
+		echo "> Creating directory"; \
+		mkdir -p ${LOVE_WIN32_SRC}; \
+		echo "> Extracting"; \
+		unzip -j ${LOVE_WIN32_ZIP} -d ${LOVE_WIN32_SRC}; \
+		echo "> win32 successfully installed in ${LOVE_WIN32_SRC}"; \
+	else \
+		echo "> win32 source already exists"; \
+	fi
+
 
 ##-- Utility targets --##
 
