@@ -9,8 +9,9 @@ VERSION     := "1.0"
 ICON        := "icon.png"
 
 ##-- Directories --##
-BUILD_DIR  := "build"
-SOURCE_DIR := "src"
+BUILD_DIR   := "build"
+SOURCE_DIR  := "src"
+ROMFS_BUILD := "${BUILD_DIR}/romfs"
 
 ##-- Uncategorized files --##
 LOVE_OUT := ${BUILD_DIR}/${EXE_NAME}.love
@@ -131,15 +132,22 @@ ${BUILD_DIR}:
 #- Nintendo 3DS -#
 
 # Compile 3DSX
-# TODO: image to t3x conversion 
-${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh
+${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh ${ROMFS_BUILD}
 	@echo "> Compiling 3DSX file"
-	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx --smdh=${BUILD_DIR}/${EXE_NAME}.smdh --romfs=${SOURCE_DIR}
+	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx --smdh=${BUILD_DIR}/${EXE_NAME}.smdh --romfs=${ROMFS_BUILD}
  
 # Compile SMDH
 ${BUILD_DIR}/${EXE_NAME}.smdh: ${BUILD_DIR}
 	@echo "> Compiling SMDH file"
 	${SMDHTOOL} --create ${TITLE} ${DESCRIPTION} ${AUTHOR} ${ICON} ${BUILD_DIR}/${EXE_NAME}.smdh
+
+# Prepare RomFS
+${ROMFS_BUILD}:
+	@echo "> Copying game code for RomFS"
+	cp -r ${SOURCE_DIR} ${ROMFS_BUILD}
+
+	@echo "> Converting all images to t3x"
+	@echo "NOT IMPLEMENTED"
 
 ##-- Dependency targets --##
 
