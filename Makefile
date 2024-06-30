@@ -147,6 +147,7 @@ deps:
 	@echo " "
 	@echo "> Dependencies are downloaded automatically when compiling a target for the first time"
 	@echo "> Use `make install_deps` to download them all"
+	@echo "> Use `make remove_deps` to remove all installed dependencies"
 
 # Install dependencies for all targets
 .PHONY: install_deps
