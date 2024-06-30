@@ -186,6 +186,8 @@ ${LOVE_WIN64_SRC}: ${LOVE_WIN64_ZIP}
 		echo "> win64 source already exists"; \
 	fi
 
+win64_dep: ${LOVE_WIN64_SRC}
+
 #-- Win32 --#
 
 # Download win32 archive
@@ -209,6 +211,7 @@ ${LOVE_WIN32_SRC}: ${LOVE_WIN32_ZIP}
 		echo "> win32 source already exists"; \
 	fi
 
+win32_dep: ${LOVE_WIN32_SRC}
 
 ##-- Utility targets --##
 
