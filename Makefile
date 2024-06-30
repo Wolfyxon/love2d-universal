@@ -139,6 +139,7 @@ ${BUILD_DIR}/${EXE_NAME}.smdh: ${BUILD_DIR}
 
 ##-- Dependency targets --##
 
+# Shows dependencies info
 .PHONY: deps
 deps:
 	@echo "> Build dependencies are stored in:"
