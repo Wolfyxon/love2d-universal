@@ -52,6 +52,9 @@ SMDHTOOL      := ${DKP_TOOLS}/smdhtool
 LOVE2D_LATEST_RELEASE        := https://api.github.com/repos/love2d/love/releases/latest
 LOVE2D_LATEST_RELEASE_OUTPUT := /tmp/love2d_latest_release
 
+LOVEPOTION_LATEST_RELEASE        := https://api.github.com/repos/lovebrew/lovepotion/releases/latest
+LOVEPOTION_LATEST_RELEASE_OUTPUT := /tmp/lovepotion_latest_release
+
 ###==-- Targets --==###
 
 ##-- Build & testing targets --##
@@ -172,6 +175,16 @@ ${LOVE2D_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
 		cat ${LOVE2D_LATEST_RELEASE_OUTPUT}; \
 	else \
 		echo "> Builds already fetched"; \
+	fi
+
+# Fetch LOVEPotion build URLS
+${LOVEPOTION_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
+	@if [ ! -f ${LOVE2D_LATEST_RELEASE_OUTPUT} ]; then \
+		echo "> Fetching LOVEPotion builds"; \
+		curl -s ${LOVEPOTION_LATEST_RELEASE_OUTPUT} | grep browser_download_url | sed -n 's/.*"browser_download_url": "\(.*\)"/\1/p' > ${LOVEPOTION_LATEST_RELEASE_OUTPUT}; \
+		cat ${LOVE2D_LATEST_RELEASE_OUTPUT}; \
+	else \
+		echo "> LOVEPotion Builds already fetched"; \
 	fi
 
 #-- Linux --#
