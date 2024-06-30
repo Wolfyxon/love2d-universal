@@ -1,2 +1,14 @@
-/build
+# Code editor config directories
 /.idea
+
+# Build files & directories
+/build
+
+*.elf
+*.exe
+*.love
+*.AppImage
+
+# Temporary files
+*.tmp
+*~
