@@ -184,7 +184,7 @@ ${LOVEPOTION_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
 		curl -s ${LOVEPOTION_LATEST_RELEASE_OUTPUT} | grep browser_download_url | sed -n 's/.*"browser_download_url": "\(.*\)"/\1/p' > ${LOVEPOTION_LATEST_RELEASE_OUTPUT}; \
 		cat ${LOVE2D_LATEST_RELEASE_OUTPUT}; \
 	else \
-		echo "> LOVEPotion Builds already fetched"; \
+		echo "> LOVEPotion builds already fetched"; \
 	fi
 
 #-- Linux --#
