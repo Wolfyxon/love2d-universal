@@ -200,6 +200,9 @@ ${LOVE_LINUX_APPIMAGE_IN}: ${LOVE2D_LATEST_RELEASE_OUTPUT}
 		echo "> Linux AppImage already exists"; \
 	fi
 
+# Install Linux dependencies
+.PHONY: linux_dep
+linux_dep: ${LOVE_LINUX_APPIMAGE_IN}
 
 #-- Win64 --#
 
