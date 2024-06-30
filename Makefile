@@ -139,6 +139,13 @@ ${BUILD_DIR}/${EXE_NAME}.smdh: ${BUILD_DIR}
 
 ##-- Dependency targets --##
 
+.PHONY: deps
+deps:
+	@echo "> Build dependencies are stored in:"
+	@echo "> ${LOVE_BINARIES}"
+	@echo " "
+	@echo "> Dependencies are downloaded when compiling a target for the first time"
+
 # Prepare directory
 ${LOVE_BINARIES}:
 	@echo "> Creating directory"
