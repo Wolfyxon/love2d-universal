@@ -80,6 +80,7 @@ run:
 
 #- Linux -#
 
+# Compile a Linux x86_64 AppImage
 .PHONY: linux
 linux: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_OUT}
 	@echo "> Creating directory"
@@ -103,6 +104,7 @@ linux: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_OUT}
 
 #- Windows -#
 
+# Compile a Windows x86_64 EXE
 .PHONY: win64
 win64: ${LOVE_WIN64_SRC} ${LOVE_OUT}
 	@echo "> Copying love source into build"
@@ -112,6 +114,7 @@ win64: ${LOVE_WIN64_SRC} ${LOVE_OUT}
 	@echo "> Embedding game into the executable"
 	cat ${LOVE_WIN64_IN} ${LOVE_OUT} > ${LOVE_WIN64_OUT}
 
+# Compile a Windows x86_32 EXE
 .PHONY: win32
 win32: ${LOVE_WIN32_SRC} ${LOVE_OUT}
 	@echo "> Copying love source into build"
