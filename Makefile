@@ -37,8 +37,8 @@ LOVE_WIN32_ZIP      := ${LOVE_BINARIES}/win32.zip
 LOVE_WIN32_BUILD    := ${BUILD_DIR}/win32
 LOVE_WIN32_OUT      := ${LOVE_WIN32_BUILD}/love.exe
 
-LOVE_3DS            := ${LOVE_BINARIES}/lovepotion.elf
-LOVE_3DS_ZIP        := ${LOVE_BINARIES}/lovepotion.zip
+LOVE_3DS            := ${LOVE_BINARIES}/lovepotion_3ds.elf
+LOVE_3DS_ZIP        := ${LOVE_BINARIES}/lovepotion_3ds.zip
 
 ##-- Software --##
 LOVE          := love
