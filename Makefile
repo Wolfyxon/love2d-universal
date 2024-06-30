@@ -132,7 +132,7 @@ ${BUILD_DIR}:
 #- Nintendo 3DS -#
 
 # Compile 3DSX
-${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh ${ROMFS_BUILD}
+${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh t3x
 	@echo "> Compiling 3DSX file"
 	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx --smdh=${BUILD_DIR}/${EXE_NAME}.smdh --romfs=${ROMFS_BUILD}
  
@@ -146,8 +146,15 @@ ${ROMFS_BUILD}:
 	@echo "> Copying game code for RomFS"
 	cp -r ${SOURCE_DIR} ${ROMFS_BUILD}
 
+# Convert all images in RomFS to .t3x
+t3x: ${ROMFS_BUILD}
 	@echo "> Converting all images to t3x"
-	@echo "NOT IMPLEMENTED"
+
+	@for file in $(shell find $(ROMFS_BUILD) -type f \( -name "*.png" -o -name "*.jpeg" -o -name "*.jpg" \)); do \
+		echo "> Converting $$file"; \
+		tex3ds "$$file" -o "$$file.tmp" -f rgba ; \
+		mv "$$file.tmp" "$$file"; \
+	done
 
 ##-- Dependency targets --##
 
