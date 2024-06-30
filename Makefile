@@ -155,7 +155,7 @@ deps:
 
 # Install dependencies for all targets
 .PHONY: install_deps
-install_deps: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_WIN64_SRC} ${LOVE_WIN32_SRC}
+install_deps: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_WIN64_SRC} ${LOVE_WIN32_SRC} ${LOVE_3DS}
 
 # Removes all LOVE binaries
 .PHONY: remove_deps
