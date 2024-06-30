@@ -181,7 +181,7 @@ ${LOVE_LINUX_APPIMAGE_IN}: ${LOVE2D_LATEST_RELEASE_OUTPUT}
 	@if [ ! -f ${LOVE_LINUX_APPIMAGE_IN} ]; then \
 		echo "> Downloading Linux AppImage"; \
 		curl -L ${shell cat ${LOVE2D_LATEST_RELEASE_OUTPUT} | grep AppImage } > ${LOVE_LINUX_APPIMAGE_IN}; \
-		chmod +x ${LOVE_LINUX_APPIMAGE_IN}
+		chmod +x ${LOVE_LINUX_APPIMAGE_IN}; \
 	else \
 		echo "> Linux AppImage already exists"; \
 	fi
