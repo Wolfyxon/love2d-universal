@@ -84,7 +84,7 @@ linux: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_OUT}
 	mv ${LOVE_LINUX_FS_BIN}.new ${LOVE_LINUX_FS_BIN}
 	chmod +x ${LOVE_LINUX_FS_BIN}
 
-	@echo "Packaging AppImage"
+	@echo "> Packaging AppImage"
 	${APPIMAGETOOL} ${LOVE_LINUX_FS} "${BUILD_DIR}/${EXE_NAME}.AppImage" 
 
 	@echo "> Cleaning up"
