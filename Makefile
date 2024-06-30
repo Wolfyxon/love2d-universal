@@ -38,6 +38,7 @@ LOVE_WIN32_BUILD    := ${BUILD_DIR}/win32
 LOVE_WIN32_OUT      := ${LOVE_WIN32_BUILD}/love.exe
 
 LOVE_3DS            := ${LOVE_BINARIES}/lovepotion.elf
+LOVE_3DS_ZIP        := ${LOVE_BINARIES}/lovepotion.zip
 
 ##-- Software --##
 LOVE          := love
@@ -179,9 +180,9 @@ ${LOVE2D_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
 
 # Fetch LOVEPotion build URLS
 ${LOVEPOTION_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
-	@if [ ! -f ${LOVE2D_LATEST_RELEASE_OUTPUT} ]; then \
+	@if [ ! -f ${LOVEPOTION_LATEST_RELEASE_OUTPUT} ]; then \
 		echo "> Fetching LOVEPotion builds"; \
-		curl -s ${LOVEPOTION_LATEST_RELEASE_OUTPUT} | grep browser_download_url | sed -n 's/.*"browser_download_url": "\(.*\)"/\1/p' > ${LOVEPOTION_LATEST_RELEASE_OUTPUT}; \
+		curl -s ${LOVEPOTION_LATEST_RELEASE} | grep browser_download_url | sed -n 's/.*"browser_download_url": "\(.*\)"/\1/p' > ${LOVEPOTION_LATEST_RELEASE_OUTPUT}; \
 		cat ${LOVE2D_LATEST_RELEASE_OUTPUT}; \
 	else \
 		echo "> LOVEPotion builds already fetched"; \
@@ -251,6 +252,30 @@ ${LOVE_WIN32_SRC}: ${LOVE_WIN32_ZIP}
 
 .PHONY: win32_dep
 win32_dep: ${LOVE_WIN32_SRC}
+
+#-- Nintendo 3DS --#
+# Download LOVEPotion archive
+${LOVE_3DS_ZIP}: ${LOVEPOTION_LATEST_RELEASE_OUTPUT}
+	@if [ ! -f ${LOVE_3DS_ZIP} ]; then \
+		echo "> Downloading Nintendo 3DS archive"; \
+		curl -L ${shell cat ${LOVEPOTION_LATEST_RELEASE_OUTPUT} | grep 3DS } > ${LOVE_3DS_ZIP}; \
+		chmod +x ${LOVE_3DS_ZIP}; \
+	else \
+		echo "> 3DS Archive already exists"; \
+	fi
+
+# Extract ELF from LOVEPotion archive
+${LOVE_3DS}: ${LOVE_3DS_ZIP}
+	@if [ ! -f ${LOVE_3DS} ]; then \
+		echo "> Extracting ELF"; \
+		unzip -p ${LOVE_3DS_ZIP} lovepotion.elf  > ${LOVE_3DS}; \
+		echo "> LOVEPotion successfully installed in ${LOVE_3DS}"; \
+	else \
+		echo "> LOVEPotion ELF already exists"; \
+	fi
+
+.PHONY: 3ds_dep
+3ds_dep: ${LOVE_3DS}
 
 ##-- Utility targets --##
 
