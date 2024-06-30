@@ -224,6 +224,7 @@ ${LOVE_WIN64_SRC}: ${LOVE_WIN64_ZIP}
 		echo "> win64 source already exists"; \
 	fi
 
+# Install Windows 64 dependencies
 .PHONY: win64_dep
 win64_dep: ${LOVE_WIN64_SRC}
 
@@ -250,6 +251,7 @@ ${LOVE_WIN32_SRC}: ${LOVE_WIN32_ZIP}
 		echo "> win32 source already exists"; \
 	fi
 
+# Install Windows 32 dependencies
 .PHONY: win32_dep
 win32_dep: ${LOVE_WIN32_SRC}
 
@@ -274,6 +276,7 @@ ${LOVE_3DS}: ${LOVE_3DS_ZIP}
 		echo "> LOVEPotion ELF already exists"; \
 	fi
 
+# Install 3DS dependencies
 .PHONY: 3ds_dep
 3ds_dep: ${LOVE_3DS}
 
