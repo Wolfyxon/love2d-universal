@@ -152,6 +152,12 @@ deps:
 .PHONY: install_deps
 install_deps: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_WIN64_SRC} ${LOVE_WIN32_SRC}
 
+# Removes all LOVE binaries
+.PHONY: remove_deps
+remove_deps:
+	@echo "> Removing all dependencies"
+	rm -rf ${LOVE_BINARIES}
+
 # Prepare directory
 ${LOVE_BINARIES}:
 	@echo "> Creating directory"
