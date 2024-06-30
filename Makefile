@@ -146,6 +146,10 @@ deps:
 	@echo " "
 	@echo "> Dependencies are downloaded when compiling a target for the first time"
 
+# Install dependencies for all targets
+.PHONY: install_deps
+install_deps: ${LOVE_LINUX_APPIMAGE_IN} ${LOVE_WIN64_SRC} ${LOVE_WIN32_SRC}
+
 # Prepare directory
 ${LOVE_BINARIES}:
 	@echo "> Creating directory"
