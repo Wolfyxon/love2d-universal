@@ -118,7 +118,7 @@ ${BUILD_DIR}:
 
 # Compile 3DSX
 ${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh
-	@echo "Compiling 3DSX file"
+	@echo "> Compiling 3DSX file"
 	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx --smdh=${BUILD_DIR}/${EXE_NAME}.smdh --romfs=${SOURCE_DIR}
  
 # Compile SMDH
