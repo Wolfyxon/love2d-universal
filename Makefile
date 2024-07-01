@@ -44,7 +44,6 @@ LOVE_3DS            := ${LOVE_3DS_DIR}/lovepotion_3ds.elf
 LOVE_3DS_ZIP        := ${LOVE_3DS_DIR}/lovepotion_3ds.zip
 
 LOVE_3DS_ASSETS_ZIP := ${LOVE_3DS_DIR}/assets.zip
-LOVE_3DS_ASSETS_DIR := ${LOVE_3DS_DIR}/assets
 
 ##-- Software --##
 LOVE          := love
@@ -346,13 +345,9 @@ ${LOVE_3DS}: ${LOVE_3DS_ZIP}
 		echo "> LOVEPotion ELF already exists"; \
 	fi
 
-# Create LOVEPotion asets directory
-${LOVE_3DS_ASSETS_DIR}: ${LOVE_3DS_DIR}
-	@echo "> Creating directory"
-	mkdir -p ${LOVE_3DS_ASSETS_DIR}
 
 # Download LOVEPotion bundler assets archive
-${LOVE_3DS_ASSETS_ZIP}: ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT} ${LOVE_3DS_ASSETS_DIR}
+${LOVE_3DS_ASSETS_ZIP}: ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT}
 	@if [ ! -f ${LOVE_3DS_ASSETS_ZIP} ]; then \
 		echo "> Downloading Nintendo 3DS archive"; \
 		curl -L ${shell cat ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT} | grep resources.zip } > ${LOVE_3DS_ASSETS_ZIP}; \
