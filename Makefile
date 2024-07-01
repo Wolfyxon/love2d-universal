@@ -240,7 +240,7 @@ ${LOVEPOTION_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
 	fi
 
 # Fetch LOVEPotion assets build URLS
-${LOVEPOTION_ASSETS_LATEST_RELEASE}: ${LOVE_BINARIES}
+${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
 	@if [ ! -f ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT} ]; then \
 		echo "> Fetching LOVEPotion bundler assets"; \
 		curl -s ${LOVEPOTION_ASSETS_LATEST_RELEASE} | grep browser_download_url | sed -n 's/.*"browser_download_url": "\(.*\)"/\1/p' > ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT}; \
