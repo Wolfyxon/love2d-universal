@@ -1,9 +1,9 @@
 ###==-- Data --==###
 
 ##-- Game data --##
-EXE_NAME    := "LovebrewTest"
-TITLE 	    := "3DS Lovebrew test"
-DESCRIPTION := "Test 3DS app using Love potion"
+EXE_NAME    := "Love2DTest"
+TITLE 	    := "Love 2D Test"
+DESCRIPTION := "Test cross compiled Love2D app"
 AUTHOR      := "Epic person"
 VERSION     := "1.0"
 ICON        := "icon.png"
