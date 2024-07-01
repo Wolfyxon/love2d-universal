@@ -54,11 +54,14 @@ SMDHTOOL      := ${DKP_TOOLS}/smdhtool
 3DSLINK       := ${DKP_TOOLS}/3dslink
 
 ##- Dependency links and output files -##
-LOVE2D_LATEST_RELEASE        := https://api.github.com/repos/love2d/love/releases/latest
-LOVE2D_LATEST_RELEASE_OUTPUT := /tmp/love2d_latest_release
+LOVE2D_LATEST_RELEASE                  := https://api.github.com/repos/love2d/love/releases/latest
+LOVE2D_LATEST_RELEASE_OUTPUT           := /tmp/love2d_latest_release
 
-LOVEPOTION_LATEST_RELEASE        := https://api.github.com/repos/lovebrew/lovepotion/releases/latest
-LOVEPOTION_LATEST_RELEASE_OUTPUT := /tmp/lovepotion_latest_release
+LOVEPOTION_LATEST_RELEASE              := https://api.github.com/repos/lovebrew/lovepotion/releases/latest
+LOVEPOTION_LATEST_RELEASE_OUTPUT       := /tmp/lovepotion_latest_release
+
+LOVEPOTION_ASSETS_LATEST_RELEASE        := https://api.github.com/repos/lovebrew/bundler/releases/latest
+LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT := /tmp/lovepotion_latest_release_assets
 
 ###==-- Targets --==###
 
@@ -231,6 +234,16 @@ ${LOVEPOTION_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
 		cat ${LOVE2D_LATEST_RELEASE_OUTPUT}; \
 	else \
 		echo "> LOVEPotion builds already fetched"; \
+	fi
+
+# Fetch LOVEPotion assets build URLS
+${LOVEPOTION_ASSETS_LATEST_RELEASE}: ${LOVE_BINARIES}
+	@if [ ! -f ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT} ]; then \
+		echo "> Fetching LOVEPotion bundler assets"; \
+		curl -s ${LOVEPOTION_ASSETS_LATEST_RELEASE} | grep browser_download_url | sed -n 's/.*"browser_download_url": "\(.*\)"/\1/p' > ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT}; \
+		cat ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT}; \
+	else \
+		echo "> LOVEPotion bundler assets already fetched"; \
 	fi
 
 #-- Linux --#
