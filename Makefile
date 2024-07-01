@@ -44,6 +44,7 @@ LOVE_3DS            := ${LOVE_3DS_DIR}/lovepotion_3ds.elf
 LOVE_3DS_ZIP        := ${LOVE_3DS_DIR}/lovepotion_3ds.zip
 
 LOVE_3DS_ASSETS_ZIP := ${LOVE_3DS_DIR}/assets.zip
+LOVE_3DS_ROMFS      := ${LOVE_3DS_DIR}/files.romfs
 
 ##-- Software --##
 LOVE          := love
@@ -354,6 +355,16 @@ ${LOVE_3DS_ASSETS_ZIP}: ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT}
 		chmod +x ${LOVE_3DS_ASSETS_ZIP}; \
 	else \
 		echo "> 3DS bunlder assets archive already exists"; \
+	fi
+
+# Extract RomFS
+${LOVE_3DS_ROMFS}: ${LOVE_3DS_ASSETS_ZIP}
+	@if [ ! -f ${LOVE_3DS_ROMFS} ]; then \
+		echo "> Extracting RomFS"; \
+		unzip -p -j ${LOVE_3DS_ASSETS_ZIP} ctr/files.romfs > ${LOVE_3DS_ROMFS}; \
+		echo "> LOVEPotion RomFS successfully installed in ${LOVE_3DS_ROMFS}"; \
+	else \
+		echo "> LOVEPotion RomFS already exists"; \
 	fi
 
 # Install 3DS dependencies
