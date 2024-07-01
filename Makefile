@@ -12,7 +12,7 @@ ICON        := "icon.png"
 BUILD_DIR    := "build"
 SOURCE_DIR   := "src"
 SOURCE_BUILD := "${BUILD_DIR}/src"
-SOURCE_ZIP   := "$BUILD_DIR/src.zip"
+SOURCE_ZIP   := "${BUILD_DIR}/src.zip"
 
 ##-- Uncategorized files --##
 LOVE_OUT := ${BUILD_DIR}/${EXE_NAME}.love
@@ -154,8 +154,12 @@ ${BUILD_DIR}:
 
 # Compile 3DSX
 ${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh ${SOURCE_ZIP}
+#   TODO: Find LOVEPotion RomFS
 	@echo "> Compiling 3DSX file"
-	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx --smdh=${BUILD_DIR}/${EXE_NAME}.smdh
+	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx.tmp --smdh=${BUILD_DIR}/${EXE_NAME}.smdh
+
+	@echo "> Embedding game's code"
+	cat ${BUILD_DIR}/${EXE_NAME}.3dsx.tmp ${SOURCE_ZIP} > ${BUILD_DIR}/${EXE_NAME}.3dsx
  
 # Compile SMDH
 ${BUILD_DIR}/${EXE_NAME}.smdh: ${BUILD_DIR}
