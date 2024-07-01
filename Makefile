@@ -39,8 +39,9 @@ LOVE_WIN32_ZIP      := ${LOVE_BINARIES}/win32.zip
 LOVE_WIN32_BUILD    := ${BUILD_DIR}/win32
 LOVE_WIN32_OUT      := ${LOVE_WIN32_BUILD}/love.exe
 
-LOVE_3DS            := ${LOVE_BINARIES}/lovepotion_3ds.elf
-LOVE_3DS_ZIP        := ${LOVE_BINARIES}/lovepotion_3ds.zip
+LOVE_3DS_DIR        := ${LOVE_BINARIES}/3ds
+LOVE_3DS            := ${LOVE_3DS_DIR}/lovepotion_3ds.elf
+LOVE_3DS_ZIP        := ${LOVE_3DS_DIR}/lovepotion_3ds.zip
 
 ##-- Software --##
 LOVE          := love
@@ -303,8 +304,14 @@ ${LOVE_WIN32_SRC}: ${LOVE_WIN32_ZIP}
 win32_dep: ${LOVE_WIN32_SRC}
 
 #-- Nintendo 3DS --#
+
+# Create 3DS dependency directory
+${LOVE_3DS_DIR}:
+	echo "> Creating directory"
+	mkdir -p ${LOVE_3DS_DIR}
+
 # Download LOVEPotion archive
-${LOVE_3DS_ZIP}: ${LOVEPOTION_LATEST_RELEASE_OUTPUT}
+${LOVE_3DS_ZIP}: ${LOVEPOTION_LATEST_RELEASE_OUTPUT} ${LOVE_3DS_DIR}
 	@if [ ! -f ${LOVE_3DS_ZIP} ]; then \
 		echo "> Downloading Nintendo 3DS archive"; \
 		curl -L ${shell cat ${LOVEPOTION_LATEST_RELEASE_OUTPUT} | grep 3DS } > ${LOVE_3DS_ZIP}; \
