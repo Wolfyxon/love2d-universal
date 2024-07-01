@@ -9,9 +9,9 @@ VERSION     := "1.0"
 ICON        := "icon.png"
 
 ##-- Directories --##
-BUILD_DIR   := "build"
-SOURCE_DIR  := "src"
-ROMFS_BUILD := "${BUILD_DIR}/romfs"
+BUILD_DIR    := "build"
+SOURCE_DIR   := "src"
+SOURCE_BUILD := "${BUILD_DIR}/src"
 
 ##-- Uncategorized files --##
 LOVE_OUT := ${BUILD_DIR}/${EXE_NAME}.love
@@ -154,23 +154,23 @@ ${BUILD_DIR}:
 # Compile 3DSX
 ${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh t3x
 	@echo "> Compiling 3DSX file"
-	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx --smdh=${BUILD_DIR}/${EXE_NAME}.smdh --romfs=${ROMFS_BUILD}
+	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx --smdh=${BUILD_DIR}/${EXE_NAME}.smdh
  
 # Compile SMDH
 ${BUILD_DIR}/${EXE_NAME}.smdh: ${BUILD_DIR}
 	@echo "> Compiling SMDH file"
 	${SMDHTOOL} --create ${TITLE} ${DESCRIPTION} ${AUTHOR} ${ICON} ${BUILD_DIR}/${EXE_NAME}.smdh
 
-# Prepare RomFS
-${ROMFS_BUILD}:
-	@echo "> Copying game code for RomFS"
-	cp -r ${SOURCE_DIR} ${ROMFS_BUILD}
+# Prepare game source
+${SOURCE_BUILD}:
+	@echo "> Copying game code"
+	cp -r ${SOURCE_DIR} ${SOURCE_BUILD}
 
-# Convert all images in RomFS to .t3x
-t3x: ${ROMFS_BUILD}
+# Convert all images to .t3x
+t3x: ${SOURCE_BUILD}
 	@echo "> Converting all images to t3x"
 
-	@for file in $(shell find $(ROMFS_BUILD) -type f \( -name "*.png" -o -name "*.jpeg" -o -name "*.jpg" \)); do \
+	@for file in $(shell find $(SOURCE_BUILD) -type f \( -name "*.png" -o -name "*.jpeg" -o -name "*.jpg" \)); do \
 		echo "> Converting $$file"; \
 		tex3ds "$$file" -o "$$file.tmp" -f rgba ; \
 		mv "$$file.tmp" "$$file"; \
