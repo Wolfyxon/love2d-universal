@@ -216,7 +216,7 @@ ${LOVE_BINARIES}:
 	@echo "> Creating directory"
 	mkdir -p ${LOVE_BINARIES}
 
-# Fetch build URLs
+# Fetch love2D builds
 ${LOVE2D_LATEST_RELEASE_OUTPUT}: ${LOVE_BINARIES}
 	@if [ ! -f ${LOVE2D_LATEST_RELEASE_OUTPUT} ]; then \
 		echo "> Fetching love2d builds"; \
