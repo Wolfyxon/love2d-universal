@@ -160,10 +160,10 @@ ${BUILD_DIR}:
 #- Nintendo 3DS -#
 
 # Compile 3DSX
-${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh ${SOURCE_ZIP}
+${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh ${SOURCE_ZIP} ${LOVE_3DS_ROMFS}
 #   TODO: Find LOVEPotion RomFS
 	@echo "> Compiling 3DSX file"
-	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx.tmp --smdh=${BUILD_DIR}/${EXE_NAME}.smdh
+	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx.tmp --smdh=${BUILD_DIR}/${EXE_NAME}.smdh --romfs=${LOVE_3DS_ROMFS}
 
 	@echo "> Embedding game's code"
 	cat ${BUILD_DIR}/${EXE_NAME}.3dsx.tmp ${SOURCE_ZIP} > ${BUILD_DIR}/${EXE_NAME}.3dsx
