@@ -12,6 +12,7 @@ ICON        := "icon.png"
 BUILD_DIR    := "build"
 SOURCE_DIR   := "src"
 SOURCE_BUILD := "${BUILD_DIR}/src"
+SOURCE_ZIP   := "$BUILD_DIR/src.zip"
 
 ##-- Uncategorized files --##
 LOVE_OUT := ${BUILD_DIR}/${EXE_NAME}.love
@@ -152,7 +153,7 @@ ${BUILD_DIR}:
 #- Nintendo 3DS -#
 
 # Compile 3DSX
-${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh t3x
+${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh ${SOURCE_ZIP}
 	@echo "> Compiling 3DSX file"
 	${3DSXTOOL} ${LOVE_3DS} ${BUILD_DIR}/${EXE_NAME}.3dsx --smdh=${BUILD_DIR}/${EXE_NAME}.smdh
  
@@ -175,6 +176,10 @@ t3x: ${SOURCE_BUILD}
 		tex3ds "$$file" -o "$$file.tmp" -f rgba ; \
 		mv "$$file.tmp" "$$file"; \
 	done
+
+${SOURCE_ZIP}: t3x
+	@echo "> Archiving game's code"
+	cd ${SOURCE_BUILD} && zip -9 -r ../src.zip *
 
 ##-- Dependency targets --##
 
