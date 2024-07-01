@@ -1,8 +1,0 @@
-Missings `strings` in 3DSX compared to official bundler:
-
-main.luafunction love.draw(screen)
-main.luaPK
-
-
-you append the zip to the end of the binary
-cat lovepotion.3dsx game.zip > mygame.3dsx
