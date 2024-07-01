@@ -352,7 +352,6 @@ ${LOVE_3DS_ASSETS_ZIP}: ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT}
 	@if [ ! -f ${LOVE_3DS_ASSETS_ZIP} ]; then \
 		echo "> Downloading Nintendo 3DS archive"; \
 		curl -L ${shell cat ${LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT} | grep resources.zip } > ${LOVE_3DS_ASSETS_ZIP}; \
-		chmod +x ${LOVE_3DS_ASSETS_ZIP}; \
 	else \
 		echo "> 3DS bunlder assets archive already exists"; \
 	fi
