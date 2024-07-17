@@ -1,4 +1,4 @@
-local testImg = love.graphics.newImage( "test.png")
+local testImg = love.graphics.newImage("test.png")
 local testImgW, testImgH = testImg:getDimensions()
 
 function love.draw(screen)
