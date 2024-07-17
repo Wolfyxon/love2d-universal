@@ -1,6 +1,6 @@
 # This Makefile is a part of 'Love2D Universal'
 # A cross-compiled project setup for Love2D games.
-# GitHub: https://github.com/Wolfyxon/love2d-universal-template
+# GitHub: https://github.com/Wolfyxon/love2d-universal
 #
 # This Makefile is a subject of the public domain and released under the Unlicense License (https://unlicense.org)
 # You are free to do anything you want :3
