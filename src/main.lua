@@ -4,7 +4,7 @@ local testImgW, testImgH = testImg:getDimensions()
 function love.draw(screen)
     local width, height = love.graphics.getDimensions(screen)
 
-    if not screen or screen == "top" then
+    if not screen or screen == "left" then -- on 3DS the upper screen is called 'left'
         love.graphics.print('Hello World!', 0, 0)
     end
     
