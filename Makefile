@@ -192,8 +192,7 @@ t3x: ${SOURCE_BUILD}
 
 	@for file in $(shell find $(SOURCE_BUILD) -type f \( -name "*.png" -o -name "*.jpeg" -o -name "*.jpg" \)); do \
 		echo "> Converting $$file"; \
-		tex3ds "$$file" -o "$$file.tmp" -f rgba ; \
-		mv "$$file.tmp" "$$file"; \
+		tex3ds "$$file" -o "$${file%.*}.t3x" -f rgba ; \
 	done
 
 ${SOURCE_ZIP}: t3x
