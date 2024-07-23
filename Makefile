@@ -23,6 +23,7 @@ SOURCE_BUILD := "${BUILD_DIR}/src"
 SOURCE_ZIP   := "${BUILD_DIR}/src.zip"
 
 ##-- Uncategorized files --##
+SCRIPTS  := $(wildcard */*.lua)
 LOVE_OUT := ${BUILD_DIR}/${EXE_NAME}.love
 
 ##-- Love executables to embed the game into --##
@@ -80,7 +81,7 @@ LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT := /tmp/lovepotion_latest_release_assets
 
 #- Universal PC -#
 
-${LOVE_OUT}: ${BUILD_DIR}
+${LOVE_OUT}: parse ${BUILD_DIR}
 	@echo "> Removing old .love file to prevent adding files"
 	rm -f ${LOVE_OUT}
 
@@ -90,8 +91,14 @@ ${LOVE_OUT}: ${BUILD_DIR}
 .PHONY: love
 love: ${LOVE_OUT}
 
+.PHONY: parse
+parse:
+	@echo "> Verifying Lua syntax"
+	luac -p ${SCRIPTS}
+
+
 .PHONY: run
-run:
+run: parse
 	@echo "> Running the source directory with LOVE"
 	${LOVE} ${SOURCE_DIR}
 
