@@ -22,6 +22,7 @@ This project uses [Love2D](https://love2d.org/). A 2D Lua game engine, and [LOVE
 
 > [!NOTE]  
 > The 3DS version may not work under emulators. On real hardware it will most likely crash on the first run, but run successfully when restarted. This seems to be a LovePotion bug (or my 3DS is broken lol).
+> To test the 3DS version of your game, use `make 3ds_nest` or `make 3dslink` 
 
 Feel free to contribute to Love2D and the Makefile to add support for more platforms!
 To learn how to run and build your project, refer to the [wiki](https://github.com/Wolfyxon/love2d-universal/wiki).
