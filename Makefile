@@ -21,6 +21,7 @@ BUILD_DIR    := "build"
 SOURCE_DIR   := "src"
 SOURCE_BUILD := "${BUILD_DIR}/src"
 SOURCE_ZIP   := "${BUILD_DIR}/src.zip"
+3DS_NEST_DIR := ${BUILD_DIR}/3ds_nest
 
 ##-- Uncategorized files --##
 SCRIPTS  := $(wildcard */*.lua)
@@ -74,6 +75,9 @@ LOVEPOTION_LATEST_RELEASE_OUTPUT       := /tmp/lovepotion_latest_release
 
 LOVEPOTION_ASSETS_LATEST_RELEASE        := https://api.github.com/repos/lovebrew/bundler/releases/latest
 LOVEPOTION_ASSETS_LATEST_RELEASE_OUTPUT := /tmp/lovepotion_latest_release_assets
+
+LOVEPOTION_NEST_URL                     := https://github.com/lovebrew/nest/archive/master.tar.gz
+LOVEPOTION_NEST                         := ${LOVE_BINARIES}/nest.tar.gz
 
 ###==-- Targets --==###
 
@@ -163,6 +167,25 @@ win32: ${LOVE_WIN32_SRC} ${LOVE_OUT}
 	@echo "> Running the 3DSX file with an emulator"
 	${3DS_EMULATOR} ${BUILD_DIR}/${EXE_NAME}.3dsx
 
+# Simulate the 3DS environment with NEST
+3ds_nest: ${LOVEPOTION_NEST} ${3DS_NEST_DIR}/nest
+	@echo "> Adding NEST to the main script"
+	sed -i '1i require("nest").init({console = "3ds"})' ${3DS_NEST_DIR}/main.lua
+
+	@echo "> Running with LOVE"
+	${LOVE} ${3DS_NEST_DIR}
+
+# Extract NEST
+${3DS_NEST_DIR}/nest: ${3DS_NEST_DIR}
+	@echo "> Extracting NEST"
+	mkdir -p ${3DS_NEST_DIR}/nest
+	cd ${3DS_NEST_DIR}/nest && tar --strip-components=2 -xvzf ${LOVEPOTION_NEST} nest-master/nest
+
+# Copy source to build subdirectory for the 3DS
+${3DS_NEST_DIR}: ${BUILD_DIR}
+	@echo "> Copying source to ${3DS_NEST_DIR}"
+	cp -R ${SOURCE_DIR} ${3DS_NEST_DIR}
+
 # Remotely run 3DSX on a 3DS
 .PHONY: 3dslink
 3dslink: ${BUILD_DIR}/${EXE_NAME}.3dsx
@@ -171,8 +194,6 @@ win32: ${LOVE_WIN32_SRC} ${LOVE_OUT}
 ${BUILD_DIR}:
 	@echo "> Creating build directory"
 	-mkdir -p ${BUILD_DIR}
-
-#- Nintendo 3DS -#
 
 # Compile 3DSX
 ${BUILD_DIR}/${EXE_NAME}.3dsx: ${BUILD_DIR}/${EXE_NAME}.smdh ${SOURCE_ZIP} ${LOVE_3DS_ROMFS}
@@ -380,9 +401,21 @@ ${LOVE_3DS_ROMFS}: ${LOVE_3DS_ASSETS_ZIP}
 		echo "> LOVEPotion RomFS already exists"; \
 	fi
 
+# Download NEST archive
+${LOVEPOTION_NEST}: ${LOVE_BINARIES}
+	@if [ ! -f ${LOVEPOTION_NEST} ]; then \
+		echo "> Downloading LovePotion NEST"
+		curl -L ${LOVEPOTION_NEST_URL} > ${LOVEPOTION_NEST}
+	else \
+		echo "> NEST archive already exists"; \
+	fi
+
 # Install 3DS dependencies
 .PHONY: 3ds_dep
 3ds_dep: ${LOVE_3DS}
+
+.PHONY: nest_dep
+nest_dep: ${LOVEPOTION_NEST}
 
 ##-- Utility targets --##
 
