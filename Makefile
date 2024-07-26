@@ -404,8 +404,8 @@ ${LOVE_3DS_ROMFS}: ${LOVE_3DS_ASSETS_ZIP}
 # Download NEST archive
 ${LOVEPOTION_NEST}: ${LOVE_BINARIES}
 	@if [ ! -f ${LOVEPOTION_NEST} ]; then \
-		echo "> Downloading LovePotion NEST" \
-		curl -L ${LOVEPOTION_NEST_URL} > ${LOVEPOTION_NEST} \
+		echo "> Downloading LovePotion NEST"; \
+		curl -L ${LOVEPOTION_NEST_URL} > ${LOVEPOTION_NEST}; \
 	else \
 		echo "> NEST archive already exists"; \
 	fi
