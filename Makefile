@@ -83,6 +83,9 @@ LOVEPOTION_NEST                         := ${LOVE_BINARIES}/nest.tar.gz
 
 ##-- Build & testing targets --##
 
+# Builds for all desktop platforms
+pc: linux win64 win32
+
 #- Universal PC -#
 
 ${LOVE_OUT}: parse ${BUILD_DIR}
