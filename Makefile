@@ -107,7 +107,7 @@ parse:
 .PHONY: run
 run: parse
 	@echo "> Running the source directory with LOVE"
-	${LOVE} ${SOURCE_DIR}
+	${LOVE} ${SOURCE_DIR} $@
 
 #- Linux -#
 
