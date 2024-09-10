@@ -145,6 +145,7 @@ win64: ${LOVE_WIN64_SRC} ${LOVE_OUT}
 	@echo "> Embedding game into the executable"
 	cat ${LOVE_WIN64_IN} ${LOVE_OUT} > ${LOVE_WIN64_OUT}
 	rm ${LOVE_WIN64_BUILD}/love.exe
+	rm ${LOVE_WIN64_BUILD}/lovec.exe
 
 # Compile a Windows x86_32 EXE
 .PHONY: win32
@@ -156,6 +157,7 @@ win32: ${LOVE_WIN32_SRC} ${LOVE_OUT}
 	@echo "> Embedding game into the executable"
 	cat ${LOVE_WIN32_IN} ${LOVE_OUT} > ${LOVE_WIN32_OUT}
 	rm ${LOVE_WIN32_BUILD}/love.exe
+	rm ${LOVE_WIN32_BUILD}/lovec.exe
 
 
 #- Nintendo 3DS -#
