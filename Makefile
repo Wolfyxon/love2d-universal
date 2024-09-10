@@ -41,13 +41,13 @@ LOVE_WIN64_SRC      := ${LOVE_BINARIES}/win64
 LOVE_WIN64_IN       := ${LOVE_WIN64_SRC}/love.exe
 LOVE_WIN64_ZIP      := ${LOVE_BINARIES}/win64.zip
 LOVE_WIN64_BUILD    := ${BUILD_DIR}/win64
-LOVE_WIN64_OUT      := ${LOVE_WIN64_BUILD}/love.exe
+LOVE_WIN64_OUT      := ${LOVE_WIN64_BUILD}/${EXE_NAME}.exe
 
 LOVE_WIN32_SRC      := ${LOVE_BINARIES}/win32
 LOVE_WIN32_IN       := ${LOVE_WIN32_SRC}/love.exe
 LOVE_WIN32_ZIP      := ${LOVE_BINARIES}/win32.zip
 LOVE_WIN32_BUILD    := ${BUILD_DIR}/win32
-LOVE_WIN32_OUT      := ${LOVE_WIN32_BUILD}/love.exe
+LOVE_WIN32_OUT      := ${LOVE_WIN32_BUILD}/${EXE_NAME}.exe
 
 LOVE_3DS_DIR        := ${LOVE_BINARIES}/3ds
 LOVE_3DS            := ${LOVE_3DS_DIR}/lovepotion_3ds.elf
