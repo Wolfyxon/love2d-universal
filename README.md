@@ -1,4 +1,7 @@
 # Love2D Universal
+> [!IMPORTANT]
+> This project will soon no longer be maintained in favor of a advanced (and not messy) build system, [Lover](https://github.com/Wolfyxon/lover) which will replace this project.
+
 A universal [Love2D](https://love2d.org/) project template for cross platform compillation.
 
 This project uses [Love2D](https://love2d.org/). A 2D Lua game engine, and [LOVE Potion](https://lovebrew.org/), a port of Love2D for the Nintendo 3DS, Switch and Wii U.
