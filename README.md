@@ -1,6 +1,6 @@
 # Love2D Universal
 > [!IMPORTANT]
-> This project will soon no longer be maintained in favor of a advanced (and not messy) build system, [Lover](https://github.com/Wolfyxon/lover) which will replace this project.
+> This project has been replaced by [Lover](https://github.com/Wolfyxon/lover) and will no longer be maintained.
 
 A universal [Love2D](https://love2d.org/) project template for cross platform compillation.
 
